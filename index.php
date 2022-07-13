@@ -31,6 +31,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
+                position:relative;
             }
             .box_show p{
                 width: 100%;
@@ -54,7 +55,7 @@
                 justify-content: space-between;
                 overflow: auto;
             }
-            .operation input[type="button"]{
+            .operation span{
                 color: #ffffff;
                 background-color: #0095ff;
                 padding: 11px;
@@ -109,12 +110,124 @@
             input:focus-visible {
                 outline: 1px solid #d2d2d2;
             }
+            .show_oper{
+                width: 35px;
+                height: 35px;
+                position: absolute; 
+                font-weight: bold;
+                background-color: red;
+                left: -34px;
+                top: 22px;
+                display: flex;
+                font-size: 30px;
+                color: white;
+                transform: rotate(221deg);
+                border-radius: 40%;
+                align-items: center;
+                justify-content: center; 
+            }
+            .bx1_t{
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                font-weight: bold;
+                background-color: #0095ff;
+                right: -10px;
+                top: 7px;
+                display: flex;
+                font-size: 10px;
+                color: white;
+                border: 1px solid white;
+                transform: rotate(42deg);
+                border-radius: 30%;
+                align-items: center;
+                justify-content: center;
+            }
+            .bx2_t{
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                font-weight: bold;
+                background-color: #0095ff;
+                right: -10px;
+                top: 52px;
+                display: flex;
+                font-size: 10px;
+                color: white;
+                border: 1px solid white;
+                transform: rotate(42deg);
+                border-radius: 30%;
+                align-items: center;
+                justify-content: center;
+            }
+            .num1_t{
+                width: 22px;
+                height: 22px;
+                position: absolute;
+                font-weight: bold;
+                background-color: #ff0000;
+                /* right: -10px; */
+                top: 95px;
+                display: flex;
+                font-size: 10px;
+                color: white;
+                border: 2px solid white;
+                transform: rotate(42deg);
+                border-radius: 30%;
+                box-sizing: border-box;
+                align-items: center;
+                justify-content: center;
+            }
+            .num_t{
+                width: 22px;
+                height: 22px;
+                position: absolute;
+                font-weight: bold;
+                background-color: #ff0000;
+                left: -10px;
+                top: 95px;
+                display: flex;
+                font-size: 10px;
+                color: white;
+                border: 2px solid white;
+                transform: rotate(0deg);
+                border-radius: 30%;
+                box-sizing: border-box;
+                align-items: center;
+                justify-content: center;
+            }
+            .num2_t{
+                width: 22px;
+                height: 22px;
+                position: absolute;
+                font-weight: bold;
+                background-color: #ff0000;
+                right: -10px;
+                top: 95px;
+                display: flex;
+                font-size: 10px;
+                color: white;
+                border: 2px solid white;
+                transform: rotate(0deg);
+                border-radius: 30%;
+                box-sizing: border-box;
+                align-items: center;
+                justify-content: center;
+            }
         </style>
 </head>
 <body>
     <div class="mom_div">
         <div class="box_math" >
             <div class="box_show">
+            <div class="show_oper"></div>
+            <div class="bx1_t">1</div>
+            <div class="bx2_t">2</div>
+            <div class="num1_t">
+                <div style="transform: rotate(318deg);font-size: 10px;">max</div>
+            </div>
+            <div class="num_t">1</div>
+            <div class="num2_t">2</div>
                 <p id="bx1" ></p>
                 <p id="bx2" ></p>
                 <div class="nums">
@@ -124,11 +237,6 @@
                 <p id="result" ></p>
             </div>
             <div class="operation">
-                <input type="button" value="">
-                <input type="button" value="">
-                <input type="button" value="">
-                <input type="button" value="">
-                <input type="button" value="">
                 <span id="addition">+</span>
                 <span id="subtraction">-</span>
                 <span id="mulitiplication">*</span>
