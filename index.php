@@ -7,6 +7,13 @@
         <title>Hiii</title>
         <!-- Style CSS -->
         <style>
+            /* @font-face {
+            font-family: myFirstFont;
+            src: url(sansation_light.woff);
+            } */
+            .{
+                font-family: cursive;
+            }
             .mom_div{
                 display: flex;
                 flex-direction: column;
@@ -33,18 +40,19 @@
                 align-items: center;
                 position:relative;
             }
-            .box_show p{
+            .box_show p {
                 width: 100%;
                 border: 2px solid red;
                 padding: 5px;
                 display: flex;
                 box-sizing: border-box;
-                height: 30px;
+                height: 35px;
                 /* margin-bottom: 50px; */
                 margin: 2px;
                 margin-bottom: 12px;
                 border-radius: 6px;
                 justify-content: center;
+                overflow: auto;
             }
             .operation{
                 width: 100%;
@@ -64,6 +72,7 @@
                 border-radius: 11px;
                 text-align: center;
                 display: flex;
+                transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
                 align-items: center;
             }
             .events{
@@ -165,12 +174,12 @@
                 height: 22px;
                 position: absolute;
                 font-weight: bold;
-                background-color: #ff0000;
+                background-color: white;
                 /* right: -10px; */
-                top: 95px;
+                top: 104px;
                 display: flex;
                 font-size: 10px;
-                color: white;
+                color: red;
                 border: 2px solid white;
                 transform: rotate(42deg);
                 border-radius: 30%;
@@ -214,17 +223,23 @@
                 align-items: center;
                 justify-content: center;
             }
+        .center_bx {
+            transform: rotate(318deg);
+            font-size: 15px;
+            color: red;
+            font-weight: bold;
+        }
         </style>
 </head>
 <body>
     <div class="mom_div">
         <div class="box_math" >
             <div class="box_show">
-            <div class="show_oper"></div>
+            <div id="show_oper" class="show_oper"><div style="transform: rotate(140deg);"></div></div>
             <div class="bx1_t">1</div>
             <div class="bx2_t">2</div>
             <div class="num1_t">
-                <div style="transform: rotate(318deg);font-size: 10px;">max</div>
+                <div class="center_bx">Max</div>
             </div>
             <div class="num_t">1</div>
             <div class="num2_t">2</div>
@@ -237,10 +252,10 @@
                 <p id="result" ></p>
             </div>
             <div class="operation">
-                <span id="addition">+</span>
-                <span id="subtraction">-</span>
-                <span id="mulitiplication">*</span>
-                <span id="divison">/</span>
+                <span onclick="oper('+','addition')" id="addition">+</span>
+                <span onclick="oper('-','subtraction')"  id="subtraction">-</span>
+                <span onclick="oper('×','mulitiplication')" id="mulitiplication">×</span>
+                <span onclick="oper('÷','divison')" id="divison">÷</span>
             </div>
             <div class="events">
                 <button onclick="next()" id="next">next</button>
@@ -266,12 +281,49 @@
                 document.getElementById('bx2').innerHTML = num2;
             }
             function show(){
+                var operation = document.getElementById('show_oper').firstChild.innerHTML;
+                if(operation == ''){
+                    alert('یکی از عملگر ها را انتخاب کنید.');
+                    return;
+
+                }
                 var opr1 = document.getElementById('bx1').innerHTML;
                 var opr2 = document.getElementById('bx2').innerHTML;
                 var opr1 = Number(opr1);
                 var opr2 = Number(opr2);
-                var result = opr1 + opr2;
+                var result;
+                switch(operation) {
+                    case "+":
+                         result = opr1 + opr2;
+                        break;
+                    case "-":
+                         result = opr1 - opr2;
+                        break;
+                    case "×":
+                         result = opr1 * opr2;
+                        break;
+                    case "÷":
+                         result = opr1 / opr2;
+                        break;
+                    default:
+                         result = "han!:/";
+                    }
+                
+                if(!result && result !== 0){
+                    next();
+                    return;
+                }
                 document.getElementById('result').innerHTML = result;
+            }
+            function oper(wh,id){
+                var oper = wh;
+                document.getElementById('show_oper').firstChild.innerHTML = oper;
+                document.getElementById('addition').style.backgroundColor = '#0095ff';
+                document.getElementById('subtraction').style.backgroundColor = '#0095ff';
+                document.getElementById('mulitiplication').style.backgroundColor = '#0095ff';
+                document.getElementById('divison').style.backgroundColor = '#0095ff';
+                document.getElementById(id).style.backgroundColor = 'red';
+
             }
         </script>
 </html>
