@@ -158,7 +158,12 @@
                 document.getElementById('bx2').innerHTML = num2;
             }
             function show(){
-                alert(bx1.innerHTML);
+                var opr1 = document.getElementById('bx1').innerHTML;
+                var opr2 = document.getElementById('bx2').innerHTML;
+                var opr1 = Number(opr1);
+                var opr2 = Number(opr2);
+                var result = opr1 + opr2;
+                document.getElementById('result').innerHTML = result;
             }
         </script>
 </html>
