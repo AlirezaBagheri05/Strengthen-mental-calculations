@@ -150,9 +150,8 @@
                 num2.innerHTML = '3';
             }
             function next(){
-                var max1 = document.getElementById('num1').innerHTML;
-                alert(max1);
-                var max2 = document.getElementById('num2').innerHTML;
+                var max1 = document.getElementById('num1').value;
+                var max2 = document.getElementById('num2').value;
                 var num1 = Math.floor(Math.random() * max1);
                 var num2 = Math.floor(Math.random() * max2);
                 document.getElementById('bx1').innerHTML = num1;
