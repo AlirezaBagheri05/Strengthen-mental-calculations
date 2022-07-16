@@ -22,7 +22,7 @@
             }
             .box_math{
                 border: 1px solid black;
-                width: 80%;
+                width: 95%;
                 max-width: 500px;
                 display: flex;
                 flex-direction: column;
@@ -223,12 +223,45 @@
                 align-items: center;
                 justify-content: center;
             }
-        .center_bx {
-            transform: rotate(318deg);
-            font-size: 15px;
-            color: red;
-            font-weight: bold;
-        }
+            .center_bx {
+                transform: rotate(318deg);
+                font-size: 15px;
+                color: red;
+                font-weight: bold;
+            }
+            tr{
+                /* border-top: 1px solid #00ffb3; */
+                padding: 3px;
+                /* border-radius: 5px; */
+                display: flex;
+                justify-content: space-around;
+                
+            }
+            th{
+                background-color: black;
+                margin: 5px;
+                outline: 2px solid #0095ff;
+                font-weight: bold;
+                border-radius: 30px;
+                color: white;
+                padding: 5px;
+            }
+            td{     
+                background-color: white;
+                margin: 5px;
+                outline: 2px solid #0095ff;
+                color: black;
+                font-weight: bold;
+                border-radius: 30px;
+                display: flex;
+                padding: 5px;
+                align-items: center;
+            }
+            table{
+                width: 100%;
+                max-width: 500px;
+                margin-top: 41px;
+            }
         </style>
 </head>
 <body>
@@ -246,8 +279,8 @@
                 <p id="bx1" ></p>
                 <p id="bx2" ></p>
                 <div class="nums">
-                    <input id="num1"  type="number" name=""></input>
-                    <input id="num2"  type="number" name=""></input>
+                    <input id="num1" value="1000" type="number" name="">
+                    <input id="num2" value="1000" type="number" name="">
                 </div>
                 <p id="result" ></p>
             </div>
@@ -258,10 +291,20 @@
                 <span onclick="oper('÷','divison')" id="divison">÷</span>
             </div>
             <div class="events">
-                <button onclick="next()" id="next">next</button>
-                <button onclick="show()" id="show">show</button>
+                <button onclick="next()" >next</button>
+                <button onclick="show(true)" >show</button>
             </div>
         </div>
+        <table id="history">
+            <thead>
+                <tr>
+                    <th onclick="hiddenX()" id="hidden_c">hidden</th>
+                    <th>history</th>
+                    <th onclick="resetX()">reset</th>
+                </tr>
+            </thead>
+            <tbody id='tbody'><tr><td>operation</td><td>result</td></tr></tbody>
+        </table>
     </div>
 </body>
         <script>
@@ -273,24 +316,30 @@
                 num2.innerHTML = '3';
             }
             function next(){
+                document.getElementById('result').innerHTML = "";
                 var max1 = document.getElementById('num1').value;
                 var max2 = document.getElementById('num2').value;
                 var num1 = Math.floor(Math.random() * max1);
                 var num2 = Math.floor(Math.random() * max2);
                 document.getElementById('bx1').innerHTML = num1;
                 document.getElementById('bx2').innerHTML = num2;
+                history();
             }
-            function show(){
+            function show(op){
                 var operation = document.getElementById('show_oper').firstChild.innerHTML;
                 if(operation == ''){
                     alert('یکی از عملگر ها را انتخاب کنید.');
-                    return;
+                    return false;
 
                 }
                 var opr1 = document.getElementById('bx1').innerHTML;
                 var opr2 = document.getElementById('bx2').innerHTML;
                 var opr1 = Number(opr1);
                 var opr2 = Number(opr2);
+                if(!opr1 && opr1 !== 0){
+                    alert("لطفا گزینه بعدی را بزنید");
+                    return false;
+                }
                 var result;
                 switch(operation) {
                     case "+":
@@ -309,11 +358,11 @@
                          result = "han!:/";
                     }
                 
-                if(!result && result !== 0){
-                    next();
-                    return;
+                if(op){
+                    document.getElementById('result').innerHTML = result;
+                }else{
+                    return result;
                 }
-                document.getElementById('result').innerHTML = result;
             }
             function oper(wh,id){
                 var oper = wh;
@@ -323,7 +372,37 @@
                 document.getElementById('mulitiplication').style.backgroundColor = '#0095ff';
                 document.getElementById('divison').style.backgroundColor = '#0095ff';
                 document.getElementById(id).style.backgroundColor = 'red';
-
+                history();
+            }
+            function history(){
+                var num_1 = document.getElementById('bx1').innerHTML;
+                var num_2 = document.getElementById('bx2').innerHTML;
+                var operation = document.getElementById('show_oper').firstChild.innerHTML;
+                var history= num_1+" "+operation+" "+num_2;
+                var his = document.getElementById('history').childNodes[3];
+                var re = show(false);
+                if(re){
+                    var value = "<td>"+history+"</td><td>"+re+"</td>";
+                    var l_value = his.lastChild.innerHTML;
+                    if(l_value !== value){
+                        his.innerHTML += "<tr>"+value+"</tr>";
+                    }
+                }
+            }
+            function hiddenX(){
+                var tbody = document.getElementById('tbody');
+                var click = document.getElementById('hidden_c');
+                var veri_fy = tbody.style.display;
+                if(veri_fy == 'none'){
+                    tbody.style.display = 'block';
+                    click.innerHTML = 'hidden';
+                }else{
+                    tbody.style.display = 'none';
+                    click.innerHTML = '.  show  .';
+                }
+            }
+            function resetX(){
+               document.getElementById('tbody').innerHTML = "<tr><td>operation</td><td>result</td></tr>";
             }
         </script>
 </html>
