@@ -1,7 +1,7 @@
 
 
 <body>
-    <div class="mom_div" style="bachground-color:red">
+    <div class="mom_div" style="background-color:red">
         <div class="box_math" >
             <div class="box_show">
             <div id="show_oper" class="show_oper"><div style="transform: rotate(140deg);"></div></div>
